@@ -15,7 +15,7 @@ class AuthorsGalleriesController extends Controller
      */
     public function index($id, $page = 1, $term = '')
     {
-        $user = User::all()->find($id);
+         $user = JWTAuth::parseToken()->authenticate();
         
         return Gallery::search(($page - 1) * 10, 10, $term, $user);
     }

@@ -19,7 +19,7 @@ class CommentsController extends Controller
      */
     public function store(CommentRequest $request, $gallery_id)
     {
-        $user = User::all()->first();
+        $user = JWTAuth::parseToken()->authenticate();
         $gallery = Gallery::find($gallery_id);
 
         $comment->owner_id = $user->id;

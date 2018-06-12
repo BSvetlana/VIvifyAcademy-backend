@@ -30,7 +30,7 @@ class GalleriesController extends Controller
      */
     public function store(GalleryRequest $request)
     {
-        $user = Gallery::all()->first();
+         $user = JWTAuth::parseToken()->authenticate();
 
         $gallery = new Gallery();
 

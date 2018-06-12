@@ -15,7 +15,7 @@ class MyGalleriesController extends Controller
      */
     public function index($page = 1, $term = '')
     {
-        $user = User::all()->first();
+        $user = JWTAuth::parseToken()->authenticate();
 
         return Gallery::search(($page - 1) * 10, 10, $term, $user);
     }

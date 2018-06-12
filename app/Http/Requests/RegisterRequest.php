@@ -31,5 +31,6 @@ class RegisterRequest extends FormRequest
             'terms_and_conditions' => 'required'
 
         ];
+
     }
 }
