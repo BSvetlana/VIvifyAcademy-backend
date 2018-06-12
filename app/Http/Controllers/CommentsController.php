@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\User;
 use App\Comment;
 use App\Gallery;
@@ -16,7 +17,7 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $gallery_id)
+    public function store(CommentRequest $request, $gallery_id)
     {
         $user = User::all()->first();
         $gallery = Gallery::find($gallery_id);
