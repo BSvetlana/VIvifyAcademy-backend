@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('/galleries/{page}/{term?}','GalleriesController@index');
+Route::get('/all-galleries/{page}/{term?}','GalleriesController@index');
 Route::post('/galleries','GalleriesController@store');
 Route::get('/galleries/{id}','GalleriesController@show');
 Route::put('/galleries/{id}','GalleriesController@update');

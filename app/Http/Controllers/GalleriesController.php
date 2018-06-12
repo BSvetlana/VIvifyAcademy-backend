@@ -63,13 +63,20 @@ class GalleriesController extends Controller
      */
     public function show($id)
     {
-        return Gallery::with([
+        $galleries =  Gallery::with([
             'images' => function($query){
                 $query->orderBy('order');
             },
             'comments',
             'owner'
         ])->find($id);
+
+        if(!isset($galleries)){
+            abort(404, "Gallery doesn't exist!!!");
+        }
+
+        return $galleries;
+
     }
 
     /**
