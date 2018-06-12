@@ -16,12 +16,14 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::post('/login', 'Auth\LoginController@authenticate');
 
-Route::get('/all-galleries/{page}/{term?}','GalleriesController@index');
-Route::post('/galleries','GalleriesController@store');
-Route::get('/galleries/{id}','GalleriesController@show');
-Route::put('/galleries/{id}','GalleriesController@update');
-Route::delete('/galleries/{id}','GalleriesController@destroy');
+Route::middleware('jwt')->get('/all-galleries/{page}/{term?}','GalleriesController@index');
+Route::middleware('jwt')->post('/galleries','GalleriesController@store');
+Route::middleware('jwt')->get('/galleries/{id}','GalleriesController@show');
+Route::middleware('jwt')->put('/galleries/{id}','GalleriesController@update');
+Route::middleware('jwt')->delete('/galleries/{id}','GalleriesController@destroy');
 
-Route::get('/my-gallery/{page}/{term?}','MyGalleriesController@index');
-Route::get('/authors/{id}/{page}/{term?}','AuthorsGalleriesController@index');
+Route::middleware('jwt')->get('/my-gallery/{page}/{term?}','MyGalleriesController@index');
+Route::middleware('jwt')->get('/authors/{id}/{page}/{term?}','AuthorsGalleriesController@index');
+Route::middleware('jwt')->post('/galleries/{id}/comments', 'CommentsController@store');
