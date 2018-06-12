@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::get('/galleries','GalleriesController@index');
+Route::post('/galleries','GalleriesController@store');
+Route::get('/galleries/{id}','GalleriesController@show');
+Route::put('/galleries/{id}','GalleriesController@update');
+Route::delete('/galleries/{id}','GalleriesController@destroy');
+
+Route::get('/my-gallery','MyGalleriesController@index');
+Route::get('/authors/{id}','AuthorsGalleriesController@index');
