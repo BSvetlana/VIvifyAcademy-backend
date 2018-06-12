@@ -13,11 +13,11 @@ class MyGalleriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($page = 1, $term = '')
     {
         $user = User::all()->first();
 
-        return Gallery::find($user);
+        return Gallery::search(($page - 1) * 10, 10, $term, $user);
     }
 
 }

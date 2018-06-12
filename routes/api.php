@@ -17,11 +17,11 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::get('/galleries','GalleriesController@index');
+Route::get('/galleries/{page}/{term?}','GalleriesController@index');
 Route::post('/galleries','GalleriesController@store');
 Route::get('/galleries/{id}','GalleriesController@show');
 Route::put('/galleries/{id}','GalleriesController@update');
 Route::delete('/galleries/{id}','GalleriesController@destroy');
 
-Route::get('/my-gallery','MyGalleriesController@index');
-Route::get('/authors/{id}','AuthorsGalleriesController@index');
+Route::get('/my-gallery/{page}/{term?}','MyGalleriesController@index');
+Route::get('/authors/{id}/{page}/{term?}','AuthorsGalleriesController@index');
