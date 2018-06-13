@@ -28,7 +28,10 @@ class Gallery extends Model
     public static function search($skip, $take, $term, User $owner=null)
     {
         $query = Gallery::query();
-        $query->with(['owner']);
+        $query->with([
+            'owner',
+            'images'
+        ]);
 
         if(!empty($owner)){
             $query->where('owner_id', '=', $owner->id);
@@ -42,16 +45,16 @@ class Gallery extends Model
                       $q->where('first_name', 'like', '%'.$term.'%')
                         ->orWhere('last_name','like', '%'.$term.'%');    
                   }); 
-            });
-
-            $count = $query->count();
-            $galleries = $query->skip($skip)
-                               ->take($take)
-                               ->orderBy('created_at', 'desc')
-                               ->get();
-                               
-            return compact('count', 'galleries');                   
+            });                  
         }
+
+        $count = $query->count();
+        $galleries = $query->skip($skip)
+                            ->take($take)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+                            
+        return compact('count', 'galleries');
     }
 
 }

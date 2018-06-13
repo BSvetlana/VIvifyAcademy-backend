@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 Route::post('/login', 'Auth\LoginController@authenticate');
 Route::post('/register', 'Auth\RegisterController@register');
 
-Route::middleware('jwt')->get('/all-galleries/{page}/{term?}','GalleriesController@index');
+Route::get('/all-galleries/{page}/{term?}','GalleriesController@index');
 Route::middleware('jwt')->post('/galleries','GalleriesController@store');
 Route::middleware('jwt')->get('/galleries/{id}','GalleriesController@show');
 Route::middleware('jwt')->put('/galleries/{id}','GalleriesController@update');
