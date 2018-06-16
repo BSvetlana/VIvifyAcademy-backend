@@ -19,12 +19,12 @@ use Illuminate\Http\Request;
 Route::post('/login', 'Auth\LoginController@authenticate');
 Route::post('/register', 'Auth\RegisterController@register');
 
-Route::get('/all-galleries/{page}/{term?}','GalleriesController@index');
+Route::middleware('jwt')->get('/all-galleries/{page}/{term?}','GalleriesController@index');
 Route::middleware('jwt')->post('/galleries','GalleriesController@store');
 Route::middleware('jwt')->get('/galleries/{id}','GalleriesController@show');
 Route::middleware('jwt')->put('/galleries/{id}','GalleriesController@update');
 Route::middleware('jwt')->delete('/galleries/{id}','GalleriesController@destroy');
 
-Route::middleware('jwt')->get('/my-gallery/{page}/{term?}','MyGalleriesController@index');
-Route::middleware('jwt')->get('/authors/{id}/{page}/{term?}','AuthorsGalleriesController@index');
+Route::middleware('jwt')->get('/my-galleries/{page}/{term?}','MyGalleriesController@index');
+Route::middleware('jwt')->get('/authors-galleries/{id}/{page}/{term?}','AuthorsGalleriesController@index');
 Route::middleware('jwt')->post('/galleries/{id}/comments', 'CommentsController@store');

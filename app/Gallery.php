@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Gallery extends Model
 {
+    protected $appends = ['cover_image'];
+
     protected $fillable = [
         'name', 'description', 'owner_id'
     ];
@@ -17,7 +19,7 @@ class Gallery extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->with('owner');
     }
 
     public function owner()
@@ -25,12 +27,17 @@ class Gallery extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getCoverImageAttribute() {
+    return $this->images()->orderBy('order', 'asc')->first();
+    }
+
+
     public static function search($skip, $take, $term, User $owner=null)
     {
         $query = Gallery::query();
         $query->with([
             'owner',
-            'images'
+            'images',
         ]);
 
         if(!empty($owner)){

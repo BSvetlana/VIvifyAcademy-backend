@@ -16,10 +16,10 @@ class GalleriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page = 1, $term = '')
+    public function index($page,$term='')
     {
         return Gallery::search(($page - 1) * 10, 10, $term);
-        
+               
     }
 
     /**

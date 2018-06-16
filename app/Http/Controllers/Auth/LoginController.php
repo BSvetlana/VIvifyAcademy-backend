@@ -52,7 +52,7 @@ class LoginController extends Controller
             return response()->json(['error'=>'Could not found token!!!'],500);
         }
 
-        return response()->json(compact('token'));
+        return response()->json(compact('token', 'user'));
 
     }
 
