@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\GalleryRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Gallery;
 use App\User;
 use App\Image;
@@ -86,7 +87,7 @@ class GalleriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GalleryRequest $request, $id)
     {
         $gallery = Gallery::find($id);
 
@@ -94,6 +95,19 @@ class GalleriesController extends Controller
         $gallery->description = $request->input('description');
 
         $gallery->save();
+
+        $gallery->images()->delete();
+
+        $imagesArray = $request->input('images');
+        $images = [];
+
+        foreach($imagesArray as $image) {
+            $newImage = new Image($image);
+
+            $images[] = $newImage;
+        }
+
+        $gallery->images()->saveMany($images);
 
         return $gallery;
         

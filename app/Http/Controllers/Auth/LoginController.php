@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\User;
 
 
 class LoginController extends Controller
@@ -51,6 +52,10 @@ class LoginController extends Controller
         }catch(JWTException $e){
             return response()->json(['error'=>'Could not found token!!!'],500);
         }
+
+        $user = User::where('email', '=', $request->email)
+            ->get()
+            ->first();
 
         return response()->json(compact('token', 'user'));
 

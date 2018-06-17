@@ -28,3 +28,4 @@ Route::middleware('jwt')->delete('/galleries/{id}','GalleriesController@destroy'
 Route::middleware('jwt')->get('/my-galleries/{page}/{term?}','MyGalleriesController@index');
 Route::middleware('jwt')->get('/authors-galleries/{id}/{page}/{term?}','AuthorsGalleriesController@index');
 Route::middleware('jwt')->post('/galleries/{id}/comments', 'CommentsController@store');
+Route::middleware('jwt')->delete('/comments/{id}', 'CommentsController@destroy');

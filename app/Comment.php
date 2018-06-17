@@ -10,7 +10,7 @@ class Comment extends Model
         'body', 'owner_id', 'gallery_id'
     ];
 
-    public function galleries()
+    public function gallery()
     {
         return $this->belongsTo(Gallery::class);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\User;
 use App\Gallery;
 
@@ -16,8 +17,6 @@ class MyGalleriesController extends Controller
     public function index($page = 1, $term = '')
     {
         $user = \JWTAuth::parseToken()->authenticate();
-
-        dd($user);
 
         return Gallery::search(($page - 1) * 10, 10, $term, $user);
     }
